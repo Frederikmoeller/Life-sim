@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://kgre5chp3oi"]
+
+[sub_resource type="Gradient" id="Gradient_2kw4x"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2kw4x"]
+gradient = SubResource("Gradient_2kw4x")
+width = 32
+height = 32
+
+[node name="Wall" type="Node2D" unique_id=1685025232]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=602074043]
+texture = SubResource("GradientTexture2D_2kw4x")

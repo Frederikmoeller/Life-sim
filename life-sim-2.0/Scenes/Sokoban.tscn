@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b0blxgvqexcx2"]
+
+[ext_resource type="Script" uid="uid://d1igb43pic7s3" path="res://Scripts/Core/Sokoban/SokobanGenerator/SokobanGenerator.cs" id="1_gpyet"]
+[ext_resource type="Script" uid="uid://bltawh8yxme25" path="res://Scripts/Node/SokobanScene.cs" id="1_oxkda"]
+[ext_resource type="PackedScene" uid="uid://kgre5chp3oi" path="res://Scenes/Sprites/Wall.tscn" id="3_oxkda"]
+[ext_resource type="PackedScene" uid="uid://jrkllxk2lcqc" path="res://Scenes/Sprites/Floor.tscn" id="4_voju7"]
+[ext_resource type="PackedScene" uid="uid://dje8uo3gh6cnt" path="res://Scenes/Sprites/Box.tscn" id="5_u3n1r"]
+[ext_resource type="PackedScene" uid="uid://ct5fnc50q7nuu" path="res://Scenes/Sprites/Goal.tscn" id="6_q6rdh"]
+[ext_resource type="PackedScene" uid="uid://dg2qyjd05xnvm" path="res://Scenes/Sprites/Player.tscn" id="7_bscyd"]
+
+[node name="SokobanMain" type="Node2D" unique_id=1425465728]
+script = ExtResource("1_oxkda")
+
+[node name="SokobanGenerator" type="Node2D" parent="." unique_id=1933964852]
+script = ExtResource("1_gpyet")
+WallScene = ExtResource("3_oxkda")
+FloorScene = ExtResource("4_voju7")
+BoxScene = ExtResource("5_u3n1r")
+GoalScene = ExtResource("6_q6rdh")
+PlayerScene = ExtResource("7_bscyd")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1724433173]

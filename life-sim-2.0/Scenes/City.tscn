@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bhemssv30s4uw"]
+
+[ext_resource type="Script" uid="uid://bv5ntygphboug" path="res://Scripts/Node/CityScene.cs" id="1_skkws"]
+[ext_resource type="PackedScene" uid="uid://dg2qyjd05xnvm" path="res://Scenes/Sprites/Player.tscn" id="2_j88lv"]
+
+[node name="City" type="Node2D" unique_id=1000092228]
+script = ExtResource("1_skkws")
+
+[node name="Player" parent="." unique_id=1733799148 instance=ExtResource("2_j88lv")]

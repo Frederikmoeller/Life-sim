@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life Sim 2.0", "Life Sim 2.0.csproj", "{78AC6C25-E5DA-4F86-BA08-30CA0432F225}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{78AC6C25-E5DA-4F86-BA08-30CA0432F225}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
