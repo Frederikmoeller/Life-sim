@@ -26,7 +26,7 @@ public partial class BoxController : Node2D
             this,
             "position",
             target,
-            0.12f
+            0.20f
         );
 
         await ToSignal(

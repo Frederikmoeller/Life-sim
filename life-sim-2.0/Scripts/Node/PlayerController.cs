@@ -16,6 +16,16 @@ public partial class PlayerController : CharacterBody2D
     [Export] private float _speed = 150f;
     private Vector2 _movementInput;
 
+    private AnimatedSprite2D _animatedSprite;
+
+    private Vector2I _lastDirection = Vector2I.Zero;
+
+    public override void _Ready()
+    {
+        _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+    }
+
+
     public void Initialize(Level level, Dictionary<Box, BoxController> controllers)
     {
         _level = level;
@@ -32,6 +42,7 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _Process(double delta)
     {
+
         if (GameManager.Instance.CurrentMode != GameMode.Sokoban)
             return;
 
@@ -51,8 +62,58 @@ public partial class PlayerController : CharacterBody2D
         }
     }
 
+    private void Animate(Vector2I direction, bool moving)
+    {
+        if (direction != Vector2I.Zero)
+        _lastDirection = direction;
+
+        if (moving)
+        {
+            if (_lastDirection == Vector2I.Right)
+            {
+                _animatedSprite.Play("Walking_Sideways");
+                _animatedSprite.FlipH = true;
+            }
+            else if (_lastDirection == Vector2I.Left)
+            {
+                _animatedSprite.Play("Walking_Sideways");
+                _animatedSprite.FlipH = false;
+            }
+            else if (_lastDirection == Vector2I.Up)
+            {
+                _animatedSprite.Play("Walking_Up");
+            }
+            else if (_lastDirection == Vector2I.Down)
+            {
+                _animatedSprite.Play("Walking_Down");
+            }
+        }
+        else
+        {
+            if (_lastDirection == Vector2I.Right)
+            {
+                _animatedSprite.Play("Idle_Sideways");
+                _animatedSprite.FlipH = true;
+            }
+            else if (_lastDirection == Vector2I.Left)
+            {
+                _animatedSprite.Play("Idle_Sideways");
+                _animatedSprite.FlipH = false;
+            }
+            else if (_lastDirection == Vector2I.Up)
+            {
+                _animatedSprite.Play("Idle_Up");
+            }
+            else if (_lastDirection == Vector2I.Down)
+            {
+                _animatedSprite.Play("Idle_Down");
+            }
+        }
+    }
+
     public void TryMove(Vector2I direction)
     {
+        Animate(direction, true);
         if (_level.CanMove(direction))
         {
             _level.PlayerPosition += direction;
@@ -94,6 +155,15 @@ public partial class PlayerController : CharacterBody2D
             "move_down"
         );
 
+        if (direction != Vector2.Zero)
+        {
+            Animate((Vector2I)direction.Round(), true);
+        }
+
+        else
+        {
+            Animate(_lastDirection, false);
+        }
 
         Velocity = direction * _speed;
 
@@ -106,14 +176,12 @@ public partial class PlayerController : CharacterBody2D
         _isMoving = true;
 
         var tween = CreateTween();
-        tween.TweenProperty(
-            this,
-            "position",
-            target,
-            0.12f);
+        tween.TweenProperty(this, "position", target, 0.20f);
 
         await ToSignal(tween, Tween.SignalName.Finished);
+
         _isMoving = false;
+        Animate(Vector2I.Zero, false);
     }
 
     private async void MoveBox(Vector2I direction)
