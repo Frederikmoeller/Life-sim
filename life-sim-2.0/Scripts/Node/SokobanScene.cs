@@ -1,7 +1,8 @@
 using Godot;
 
-public partial class SokobanScene : Node2D
+public partial class SokobanScene : GameScene
 {
+    [Export(PropertyHint.File, "*.tscn")] public string TargetScenePath;
     private Camera2D camera;
 
     public override void _Ready()
@@ -9,6 +10,7 @@ public partial class SokobanScene : Node2D
         camera = GetNode<Camera2D>("Camera2D");
         SokobanGenerator generator = GetNode<SokobanGenerator>("SokobanGenerator");
 
+        GameManager.Instance.RegisterScene(this);
         GameManager.Instance.RegisterGenerator(generator);
         GameManager.Instance.SetMode(GameMode.Sokoban);
         GameManager.Instance.StartNewGame();
@@ -55,7 +57,7 @@ public partial class SokobanScene : Node2D
             Timer.SignalName.Timeout
         );
 
-        GameManager.Instance.ChangeScene("res://Scenes/City.tscn");
+        GameManager.Instance.ChangeScene(TargetScenePath, "FrontDoor");
     }
 
     public override void _ExitTree()

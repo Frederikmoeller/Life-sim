@@ -34,9 +34,19 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if(@event.IsActionPressed("retry"))
+        if (@event.IsActionPressed("retry"))
         {
-            GameManager.Instance.Restart();
+            if (GameManager.Instance.CurrentMode == GameMode.Sokoban)
+            {    
+                GameManager.Instance.Restart();
+            }
+
+            GameManager.Instance.SaveCurrentGame(1);
+        }
+
+        if (@event.IsActionPressed("Load"))
+        {
+            GameManager.Instance.LoadGame(1);
         }
     }
 
@@ -127,6 +137,15 @@ public partial class PlayerController : CharacterBody2D
             _moveCooldown = _moveDelay;
             MoveTo(_level.PlayerPosition);
         }
+    }
+
+    public PlayerData GetSaveData()
+    {
+        return new PlayerData
+        {
+            PositionX = GlobalPosition.X,
+            PositionY = GlobalPosition.Y
+        };
     }
 
     private void HandleSokobanMovement()
