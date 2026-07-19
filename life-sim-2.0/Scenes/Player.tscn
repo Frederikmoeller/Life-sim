@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bs44dv3wdar76" path="res://Scripts/Node/PlayerController.cs" id="1_3liw5"]
 [ext_resource type="Texture2D" uid="uid://dxr21d653naqy" path="res://Assets/Characters/Character-Sprites.png" id="2_u1pkf"]
+[ext_resource type="Script" uid="uid://cnvakvu2ems6u" path="res://Scripts/Core/Interaction/InteractionDetector.cs" id="3_gntrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u1pkf"]
 atlas = ExtResource("2_u1pkf")
@@ -145,6 +146,9 @@ animations = [{
 radius = 8.0
 height = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qaq2o"]
+radius = 19.026299
+
 [node name="Player" type="CharacterBody2D" unique_id=1528599916]
 script = ExtResource("1_3liw5")
 
@@ -161,3 +165,11 @@ shape = SubResource("CapsuleShape2D_qaq2o")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1924143493]
 enabled = false
 zoom = Vector2(1.3, 1.3)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1569319618]
+script = ExtResource("3_gntrk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1028918316]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_qaq2o")
+debug_color = Color(0.37352097, 0.6150737, 0, 0.41960785)

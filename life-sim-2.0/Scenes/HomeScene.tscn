@@ -756,4 +756,6 @@ TargetSpawnPoint = "FrontDoor"
 position = Vector2(-167, 208.00002)
 scale = Vector2(1, 1.675)
 input_pickable = false
+TargetScenePath = "uid://beql1qqyn41ok"
+TargetSpawnPoint = "ParentsRoom"
 RequiresInteraction = true

@@ -1,13 +1,18 @@
 using Godot;
-using System;
 
-public partial class SceneTransition : Area2D
+public partial class SceneTransition : Area2D, IInteractable
 {
-    [Export(PropertyHint.File, "*.tscn")] public string TargetScenePath;
-    [Export] public string TargetSpawnPoint = "";
-	[Export] public bool RequiresInteraction = false;
+    [Export(PropertyHint.File, "*.tscn")]
+    public string TargetScenePath;
 
-	private bool _transitioning;
+    [Export]
+    public string TargetSpawnPoint = "";
+
+    [Export]
+    public bool RequiresInteraction = false;
+
+
+    private bool _transitioning;
 
 
     public override void _Ready()
@@ -15,24 +20,36 @@ public partial class SceneTransition : Area2D
         BodyEntered += OnBodyEntered;
     }
 
-	private void OnBodyEntered(Node2D body)
-	{
-		if (_transitioning)
-        return;
 
-		if (body is not PlayerController)
-			return;
+    private void OnBodyEntered(Node2D body)
+    {
+        if (body is not PlayerController player)
+            return;
 
-		_transitioning = true;
 
-		CallDeferred(nameof(Transition));
-	}
+        if (!RequiresInteraction)
+        {
+            Interact(player);
+        }
+    }
 
-	private void Transition()
-	{
-		GameManager.Instance.ChangeScene(
-			TargetScenePath,
-			TargetSpawnPoint
-		);
-	}
+
+    public void Interact(PlayerController player)
+    {
+        if (_transitioning)
+            return;
+
+        _transitioning = true;
+
+        CallDeferred(nameof(Transition));
+    }
+
+
+    private void Transition()
+    {
+        GameManager.Instance.ChangeScene(
+            TargetScenePath,
+            TargetSpawnPoint
+        );
+    }
 }

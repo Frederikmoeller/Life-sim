@@ -122,8 +122,9 @@ public partial class GameManager : Node
         SaveData data = new()
         {
             ScenePath = GetTree().CurrentScene.SceneFilePath,
-
-            Player = CurrentPlayer.GetSaveData()
+            Player = CurrentPlayer.GetSaveData(),
+            World = WorldStateManager.Instance?.GetSaveData() ?? new WorldData(),
+            Inventory = InventoryManager.Instance?.GetSaveData() ?? new InventoryData()
         };
 
 
@@ -136,6 +137,9 @@ public partial class GameManager : Node
 
         if(data == null)
             return;
+
+        WorldStateManager.Instance?.Load(data.World);
+        InventoryManager.Instance?.Load(data.Inventory);
 
         ChangeScene(
             data.ScenePath,
@@ -175,22 +179,6 @@ public partial class GameManager : Node
 
         camera.LimitBottom =
             (int)bounds.End.Y;
-    }
-
-    private SpawnPoint FindSpawnPoint(string id)
-    {
-        if(string.IsNullOrEmpty(id))
-            return null;
-
-        foreach(Node node in _currentScene.GetTree().GetNodesInGroup("SpawnPoints"))
-        {
-            if(node is SpawnPoint spawn && spawn.Id == id)
-                return spawn;
-        }
-
-        GD.PrintErr($"Spawn point {id} not found!");
-
-        return null;
     }
 
     public override void _ExitTree()
