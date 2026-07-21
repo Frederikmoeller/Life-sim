@@ -160,9 +160,11 @@ public partial class GameManager : Node
         WorldStateManager.Instance?.Load(data.World);
         InventoryManager.Instance?.Load(data.Inventory);
 
+        SetDayTime(data.CurrentDayTime);
+
         ChangeScene(
             data.ScenePath,
-            true,
+            false,
             position: new Vector2(
                 data.Player.PositionX,
                 data.Player.PositionY
