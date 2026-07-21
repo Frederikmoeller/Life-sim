@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class SaveData
 {
+    public DayTime CurrentDayTime { get; set; } = new();
     public string Version { get; set; } = "0.1b";
     public SaveMetadata Metadata { get; set; } = new();
     public string ScenePath { get; set; } = "";

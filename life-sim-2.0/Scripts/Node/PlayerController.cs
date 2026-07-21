@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class PlayerController : CharacterBody2D
 {
+    [Export] private Light2D PlayerLight;
     private bool _isMoving;
     private Level _level;
     private Dictionary<Box, BoxController> _boxControllers;
@@ -23,6 +24,14 @@ public partial class PlayerController : CharacterBody2D
     public override void _Ready()
     {
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        if (GameManager.Instance.GetDayTime() == DayTime.Night)
+        {
+            PlayerLight.Visible = true;
+        }
+        else
+        {
+            PlayerLight.Visible = false;
+        }
     }
 
 

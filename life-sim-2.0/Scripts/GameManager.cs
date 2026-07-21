@@ -6,6 +6,13 @@ public enum GameMode
     Exploration,
     Sokoban
 }
+public enum DayTime
+{
+    Morning,
+    Midday,
+    Evening,
+    Night
+}
 
 public partial class GameManager : Node
 {
@@ -14,6 +21,7 @@ public partial class GameManager : Node
     public static GameManager Instance { get; private set; }
     public GameMode CurrentMode { get; private set; }
     public Level CurrentLevel { get; private set; }
+    public DayTime CurrentDayTime { get; private set; }
 
     private PackedScene _playerScene;
     public PlayerController CurrentPlayer { get; private set; }
@@ -25,6 +33,7 @@ public partial class GameManager : Node
     private RandomNumberGenerator _rng;
     private SokobanGenerator generator;
     private bool levelComplete;
+
 
     public override void _Ready()
     {
@@ -38,7 +47,7 @@ public partial class GameManager : Node
         generator = node;
     }
 
-    public void StartNewGame()
+    public void StartNewSokobanGame()
     {
         levelComplete = false;
 
@@ -67,13 +76,17 @@ public partial class GameManager : Node
         }
     }
 
-    public void ChangeScene(string scenePath, string spawnId = "", Vector2? position = null)
+    public void ChangeScene(string scenePath, bool advanceDayTime = false, string spawnId = "", Vector2? position = null)
     {
         _targetSpawnId = spawnId;
         _targetPosition = position;
 
+        if (advanceDayTime)
+            AdvanceDayTime();
+
         GetTree().ChangeSceneToFile(scenePath);
     }
+
 
     public void RegisterScene(GameScene scene)
     {
@@ -92,27 +105,32 @@ public partial class GameManager : Node
 
     public void SpawnPlayer(string spawnId)
     {
-        PlayerController player =
-            _playerScene.Instantiate<PlayerController>();
-
+        PlayerController player = _playerScene.Instantiate<PlayerController>();
         _currentScene.AddChild(player);
-
         CurrentPlayer = player;
 
-
-        if(_targetPosition.HasValue)
+        if (_targetPosition.HasValue)
         {
             player.GlobalPosition = _targetPosition.Value;
             _targetPosition = null;
         }
         else
         {
-            SpawnPoint spawn = _currentScene.GetSpawnPoint(spawnId);
+            SpawnPoint spawn = null;
 
-            if(spawn != null)
+            if (!string.IsNullOrEmpty(spawnId))
+                spawn = _currentScene.GetSpawnPoint(spawnId);
+
+            if (spawn == null)
+            {
+                string defaultSpawnId = _currentScene.GetDefaultSpawnPointId();
+                if (!string.IsNullOrEmpty(defaultSpawnId))
+                    spawn = _currentScene.GetSpawnPoint(defaultSpawnId);
+            }
+
+            if (spawn != null)
                 player.GlobalPosition = spawn.GlobalPosition;
         }
-
 
         SetupPlayerCamera(player);
     }
@@ -121,6 +139,7 @@ public partial class GameManager : Node
     {
         SaveData data = new()
         {
+            CurrentDayTime = GetDayTime(),
             ScenePath = GetTree().CurrentScene.SceneFilePath,
             Player = CurrentPlayer.GetSaveData(),
             World = WorldStateManager.Instance?.GetSaveData() ?? new WorldData(),
@@ -143,11 +162,39 @@ public partial class GameManager : Node
 
         ChangeScene(
             data.ScenePath,
+            true,
             position: new Vector2(
                 data.Player.PositionX,
                 data.Player.PositionY
             )
         );
+    }
+
+    public void SetDayTime(DayTime newDayTime) 
+    {
+        CurrentDayTime = newDayTime;
+    }
+
+    public DayTime GetDayTime()
+    {
+        return CurrentDayTime;
+    }
+
+    public DayTime GetNextDayTime(DayTime time)
+    {
+        return time switch
+        {
+            DayTime.Morning => DayTime.Midday,
+            DayTime.Midday => DayTime.Evening,
+            DayTime.Evening => DayTime.Night,
+            DayTime.Night => DayTime.Morning,
+            _ => DayTime.Morning
+        };
+    }
+
+    public void AdvanceDayTime()
+    {
+        CurrentDayTime = GetNextDayTime(CurrentDayTime);
     }
 
     private void SetupPlayerCamera(PlayerController player)

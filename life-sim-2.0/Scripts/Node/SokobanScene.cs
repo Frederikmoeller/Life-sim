@@ -13,7 +13,7 @@ public partial class SokobanScene : GameScene
         GameManager.Instance.RegisterScene(this);
         GameManager.Instance.RegisterGenerator(generator);
         GameManager.Instance.SetMode(GameMode.Sokoban);
-        GameManager.Instance.StartNewGame();
+        GameManager.Instance.StartNewSokobanGame();
         GameManager.Instance.LevelCompleted += OnLevelCompleted;
         camera.Enabled = true;
         CenterCamera();
@@ -57,7 +57,7 @@ public partial class SokobanScene : GameScene
             Timer.SignalName.Timeout
         );
 
-        GameManager.Instance.ChangeScene(TargetScenePath, "FrontDoor");
+        GameManager.Instance.ChangeScene(TargetScenePath, true, "FrontDoor");
     }
 
     public override void _ExitTree()

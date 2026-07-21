@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bed4vpuabyarq"
-path="res://.godot/imported/HomeTilemap.png-8a4b5b4153514155ca455c0f231692bc.ctex"
+uid="uid://bhveukej2qsfv"
+path="res://.godot/imported/Pixel Interiors 32x32pxl.png-7f74cf0685233c80a64b4c979c8663b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilemaps/HomeTilemap.png"
-dest_files=["res://.godot/imported/HomeTilemap.png-8a4b5b4153514155ca455c0f231692bc.ctex"]
+source_file="res://Assets/Tilemaps/Pixel Interiors 32x32pxl.png"
+dest_files=["res://.godot/imported/Pixel Interiors 32x32pxl.png-7f74cf0685233c80a64b4c979c8663b4.ctex"]
 
 [params]
 

@@ -11,6 +11,8 @@ public partial class SceneTransition : Area2D, IInteractable
     [Export]
     public bool RequiresInteraction = false;
 
+	[Export] public bool AdvanceDayTime = false;
+
 
     private bool _transitioning;
 
@@ -47,9 +49,10 @@ public partial class SceneTransition : Area2D, IInteractable
 
     private void Transition()
     {
-        GameManager.Instance.ChangeScene(
-            TargetScenePath,
-            TargetSpawnPoint
-        );
+		GameManager.Instance.ChangeScene(
+			TargetScenePath,
+			AdvanceDayTime,
+			TargetSpawnPoint
+		);
     }
 }
