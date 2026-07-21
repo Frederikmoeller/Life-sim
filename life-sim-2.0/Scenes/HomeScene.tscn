@@ -138,8 +138,9 @@ texture = SubResource("GradientTexture2D_sgnae")
 
 [node name="PointLight2D5" type="PointLight2D" parent="PointLights" unique_id=1299879053]
 z_index = 8
-position = Vector2(168, 19)
+position = Vector2(176, 18.000002)
 scale = Vector2(0.8749996, 1.5)
+skew = -0.34906584
 color = Color(0, 0.33333334, 1, 1)
 energy = 2.0
 blend_mode = 2
@@ -261,8 +262,9 @@ texture = SubResource("GradientTexture2D_sgnae")
 
 [node name="PointLight2D6" type="PointLight2D" parent="PointLights" unique_id=1404880067]
 z_index = 8
-position = Vector2(183, 19)
+position = Vector2(191, 18.000002)
 scale = Vector2(0.87499934, 1.5)
+skew = -0.34906584
 color = Color(0, 0.33333334, 1, 1)
 energy = 2.0
 blend_mode = 2
@@ -272,8 +274,9 @@ texture = SubResource("GradientTexture2D_sgnae")
 
 [node name="PointLight2D7" type="PointLight2D" parent="PointLights" unique_id=1162013742]
 z_index = 8
-position = Vector2(199.99998, 19)
+position = Vector2(207.99998, 18)
 scale = Vector2(0.87499994, 1.5000002)
+skew = -0.34906584
 color = Color(0, 0.33333334, 1, 1)
 energy = 2.0
 blend_mode = 2
@@ -284,8 +287,9 @@ texture = SubResource("GradientTexture2D_sgnae")
 
 [node name="PointLight2D8" type="PointLight2D" parent="PointLights" unique_id=1817120428]
 z_index = 8
-position = Vector2(215, 19.000002)
+position = Vector2(222.99998, 18)
 scale = Vector2(0.87499976, 1.5000001)
+skew = -0.34906584
 color = Color(0, 0.33333334, 1, 1)
 energy = 2.0
 blend_mode = 2
