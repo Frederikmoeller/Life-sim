@@ -121,3 +121,64 @@ jobs:
 
 
             console.log(JSON.stringify(items, null, 2));
+
+            const issueItem = items.node.items.nodes.find(
+              item => item.content?.number === issueNumber
+            );
+
+            if (!issueItem) {
+              console.log(`Issue #${issueNumber} not found in project`);
+              return;
+            }
+
+            console.log(`Found project item: ${issueItem.id}`);
+
+
+            const statusField = fields.node.fields.nodes.find(
+              field => field.name === "Status"
+            );
+
+            const inProgressOption = statusField.options.find(
+              option => option.name === "In progress"
+            );
+
+
+            console.log(`Setting status to ${inProgressOption.name}`);
+
+
+            await github.graphql(`
+            mutation(
+              $project:ID!,
+              $item:ID!,
+              $field:ID!,
+              $option:String!
+            ) {
+
+              updateProjectV2ItemFieldValue(
+                input:{
+                  projectId:$project
+                  itemId:$item
+                  fieldId:$field
+                  value:{
+                    singleSelectOptionId:$option
+                  }
+                }
+              ){
+
+                projectV2Item {
+                  id
+                }
+
+              }
+
+            }
+            `,
+            {
+              project: projectId,
+              item: issueItem.id,
+              field: statusField.id,
+              option: inProgressOption.id
+            });
+
+
+            console.log("Moved issue to In Progress!");
