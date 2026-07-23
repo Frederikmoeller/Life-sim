@@ -81,8 +81,6 @@ jobs:
               id: projectId
             });
 
-            const projectId = project.user.projectV2.id;
-
             const items = await github.graphql(`
             query($id:ID!) {
 
