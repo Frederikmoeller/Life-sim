@@ -1,0 +1,21 @@
+name: Bug Report
+description: Report a problem
+title: "[Bug] "
+labels:
+  - bug
+
+body:
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce

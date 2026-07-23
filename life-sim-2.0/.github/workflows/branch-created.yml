@@ -1,0 +1,31 @@
+name: Move issue to In Progress
+
+on:
+  create:
+
+permissions:
+  contents: read
+  issues: read
+  repository-projects: write
+
+jobs:
+  move-card:
+
+    if: github.event.ref_type == 'branch'
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Detect issue number
+        id: issue
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+
+          if [[ "$BRANCH" =~ ([0-9]+) ]]; then
+            echo "number=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Debug
+        run: |
+          echo "Issue: ${{ steps.issue.outputs.number }}"
