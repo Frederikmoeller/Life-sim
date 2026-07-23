@@ -164,6 +164,7 @@ script = ExtResource("1_3liw5")
 PlayerLight = NodePath("LampLight")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1241909185]
+light_mask = 2
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
@@ -191,6 +192,7 @@ debug_color = Color(0.37352097, 0.6150737, 0, 0.41960785)
 energy = 0.7
 range_z_min = -1
 range_z_max = 7
+range_item_cull_mask = 3
 shadow_color = Color(0.015686275, 1, 1, 0.89411765)
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_gntrk")
