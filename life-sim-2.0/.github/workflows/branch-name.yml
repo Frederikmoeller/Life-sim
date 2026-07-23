@@ -1,0 +1,26 @@
+name: Validate branch names
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check-name:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check branch name
+        run: |
+          BRANCH="${{ github.head_ref }}"
+
+          if [[ ! "$BRANCH" =~ ^(feature|bugfix|refactor|docs|chore)/[0-9]+-.+ ]]; then
+            echo "Invalid branch name: $BRANCH"
+            echo "Expected:"
+            echo "feature/123-description"
+            echo "bugfix/123-description"
+            exit 1
+          fi
