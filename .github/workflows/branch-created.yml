@@ -36,26 +36,25 @@ jobs:
           ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
 
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PROJECT_TOKEN }}
 
           script: |
             const issueNumber = Number(process.env.ISSUE_NUMBER);
 
             console.log(`Looking for issue #${issueNumber}`);
 
-            const projects = await github.graphql(`
+            const project = await github.graphql(`
             query {
               user(login: "Frederikmoeller") {
-                projectsV2(first: 20) {
-                  nodes {
-                    number
-                    title
-                    id
-                  }
+                projectV2(number: 3) {
+                  id
+                  title
                 }
               }
             }
             `);
+
+            console.log(JSON.stringify(project, null, 2));
 
             console.log(JSON.stringify(projects, null, 2));
 
