@@ -55,3 +55,30 @@ jobs:
             `);
 
             console.log(JSON.stringify(project, null, 2));
+
+            const projectId = project.user.projectV2.id;
+
+            const fields = await github.graphql(`
+            query($id:ID!) {
+              node(id:$id) {
+                ... on ProjectV2 {
+                  fields(first:50) {
+                    nodes {
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                        options {
+                          id
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            `, {
+              id: projectId
+            });
+
+            console.log(JSON.stringify(fields, null, 2));
