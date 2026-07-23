@@ -38,20 +38,20 @@ jobs:
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
 
-        script: |
-          const issueNumber = Number(process.env.ISSUE_NUMBER);
+          script: |
+            const issueNumber = Number(process.env.ISSUE_NUMBER);
 
-          console.log(`Looking for issue #${issueNumber}`);
+            console.log(`Looking for issue #${issueNumber}`);
 
-          const project = await github.graphql(`
-            query {
-              user(login: "Frederikmoeller") {
-                projectV2(number: 3) {
-                  id
-                  title
+            const project = await github.graphql(`
+              query {
+                user(login: "Frederikmoeller") {
+                  projectV2(number: 3) {
+                    id
+                    title
+                  }
                 }
               }
-            }
-          `);
+            `);
 
-          console.log(JSON.stringify(project, null, 2));
+            console.log(JSON.stringify(project, null, 2));
