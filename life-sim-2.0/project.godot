@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Life Sim 2.0"
-run/main_scene="uid://b0blxgvqexcx2"
+config/version="0.1.0"
+run/main_scene="uid://ci7ytw7ubbsp2"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,17 +23,27 @@ SaveManager="*uid://dr8xgjni1jb77"
 WorldStateManager="*uid://curk66qvjlimw"
 InventoryManager="*uid://bw2uch33ajw8i"
 ItemDatabase="*uid://2f8a3mixrq1l"
+AudioManager="*uid://c4p7k2nijxhwm"
+UiManager="*uid://br0rxgak522kn"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [dotnet]
 
 project/assembly_name="Life Sim 2.0"
+
+[file_customization]
+
+folder_colors={
+"res://src/Scripts/Debug/": "yellow"
+}
 
 [input]
 
@@ -75,6 +86,22 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
 ]
 }
+Pause={
+"deadzone": 0.2,
+"events": []
+}
+Sprint={
+"deadzone": 0.2,
+"events": []
+}
+
+[layer_names]
+
+2d_render/layer_1="World"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="NPC"
+2d_physics/layer_4="Interactable"
 
 [physics]
 

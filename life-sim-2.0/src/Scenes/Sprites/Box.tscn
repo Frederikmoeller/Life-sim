@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dje8uo3gh6cnt"]
+
+[ext_resource type="Script" uid="uid://bnb7y28n43ngp" path="res://src/Scripts/Node/Instances/BoxController.cs" id="1_2u4ir"]
+
+[sub_resource type="Gradient" id="Gradient_dubkk"]
+colors = PackedColorArray(0.3529412, 0.15294118, 0, 1, 0.35105878, 0.1510635, 2.4065375e-08, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_04xat"]
+gradient = SubResource("Gradient_dubkk")
+width = 32
+height = 32
+
+[node name="Box" type="Node2D" unique_id=365237611]
+script = ExtResource("1_2u4ir")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1444145533]
+texture = SubResource("GradientTexture2D_04xat")

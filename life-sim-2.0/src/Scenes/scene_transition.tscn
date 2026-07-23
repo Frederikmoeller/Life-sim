@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b6f7jgrtcu3sv"]
+
+[ext_resource type="Script" uid="uid://c51o18ufxdfs1" path="res://src/Scripts/Node/World/SceneTransition.cs" id="2_3wnqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgnae"]
+
+[node name="MainGame" type="Area2D" unique_id=141446692]
+process_mode = 3
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("2_3wnqs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1731957015]
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_sgnae")

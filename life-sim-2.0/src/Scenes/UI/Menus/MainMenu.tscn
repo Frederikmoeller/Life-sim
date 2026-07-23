@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ce8jfo58iqgd6"]
+
+[ext_resource type="Script" uid="uid://dg1w7hrqubqis" path="res://src/Scripts/Node/UI/MainMenu.cs" id="1_008j1"]
+
+[node name="MainMenu" type="Control" unique_id=669529711 node_paths=PackedStringArray("ButtonList")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_008j1")
+ButtonList = NodePath("MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1941485666]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=936288188]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

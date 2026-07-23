@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b0blxgvqexcx2"]
+
+[ext_resource type="Script" uid="uid://bltawh8yxme25" path="res://src/Scripts/Node/SokobanScene.cs" id="1_lvaqy"]
+[ext_resource type="Script" uid="uid://d1igb43pic7s3" path="res://src/Scripts/Core/Sokoban/SokobanGenerator/SokobanGenerator.cs" id="2_ciogt"]
+[ext_resource type="PackedScene" uid="uid://kgre5chp3oi" path="res://src/Scenes/Sprites/Wall.tscn" id="3_rhl1n"]
+[ext_resource type="PackedScene" uid="uid://jrkllxk2lcqc" path="res://src/Scenes/Sprites/Floor.tscn" id="4_hyk1q"]
+[ext_resource type="PackedScene" uid="uid://dje8uo3gh6cnt" path="res://src/Scenes/Sprites/Box.tscn" id="5_lo06h"]
+[ext_resource type="PackedScene" uid="uid://ct5fnc50q7nuu" path="res://src/Scenes/Sprites/Goal.tscn" id="6_tt6s7"]
+[ext_resource type="PackedScene" uid="uid://dg2qyjd05xnvm" path="res://src/Scenes/Player.tscn" id="7_5gb8t"]
+
+[node name="SokobanMain" type="Node2D" unique_id=1425465728]
+script = ExtResource("1_lvaqy")
+TargetScenePath = "uid://beql1qqyn41ok"
+Mode = 1
+
+[node name="SokobanGenerator" type="Node2D" parent="." unique_id=1933964852]
+script = ExtResource("2_ciogt")
+WallScene = ExtResource("3_rhl1n")
+FloorScene = ExtResource("4_hyk1q")
+BoxScene = ExtResource("5_lo06h")
+GoalScene = ExtResource("6_tt6s7")
+PlayerScene = ExtResource("7_5gb8t")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1724433173]
