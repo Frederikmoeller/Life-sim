@@ -38,12 +38,12 @@ jobs:
         with:
           github-token: ${{ secrets.PROJECT_TOKEN }}
 
-          script: |
-            const issueNumber = Number(process.env.ISSUE_NUMBER);
+        script: |
+          const issueNumber = Number(process.env.ISSUE_NUMBER);
 
-            console.log(`Looking for issue #${issueNumber}`);
+          console.log(`Looking for issue #${issueNumber}`);
 
-            const project = await github.graphql(`
+          const project = await github.graphql(`
             query {
               user(login: "Frederikmoeller") {
                 projectV2(number: 3) {
@@ -52,53 +52,6 @@ jobs:
                 }
               }
             }
-            `);
+          `);
 
-            console.log(JSON.stringify(project, null, 2));
-
-            console.log(JSON.stringify(projects, null, 2));
-
-            console.log(project);
-
-            const projectData = project.user.projectV2;
-
-
-            const fields = await github.graphql(`
-              query($id:ID!) {
-
-                node(id:$id) {
-
-                  ... on ProjectV2 {
-
-                    fields(first:50) {
-
-                      nodes {
-
-                        ... on ProjectV2SingleSelectField {
-
-                          id
-                          name
-
-                          options {
-                            id
-                            name
-                          }
-
-                        }
-
-                      }
-
-                    }
-
-                  }
-
-                }
-
-              }
-            `,
-            {
-              id: projectData.id
-            });
-
-
-            console.log(JSON.stringify(fields,null,2));
+          console.log(JSON.stringify(project, null, 2));
