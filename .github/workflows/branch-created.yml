@@ -43,16 +43,21 @@ jobs:
 
             console.log(`Looking for issue #${issueNumber}`);
 
-            const project = await github.graphql(`
-              query {
-                user(login: "Frederikmoeller") {
-                  projectV2(number: 3) {
-                    id
+            const projects = await github.graphql(`
+            query {
+              user(login: "Frederikmoeller") {
+                projectsV2(first: 20) {
+                  nodes {
+                    number
                     title
+                    id
                   }
                 }
               }
+            }
             `);
+
+            console.log(JSON.stringify(projects, null, 2));
 
             console.log(project);
 
