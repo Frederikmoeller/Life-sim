@@ -81,4 +81,45 @@ jobs:
               id: projectId
             });
 
-            console.log(JSON.stringify(fields, null, 2));
+            const projectId = project.user.projectV2.id;
+
+            const items = await github.graphql(`
+            query($id:ID!) {
+
+              node(id:$id) {
+
+                ... on ProjectV2 {
+
+                  items(first:100) {
+
+                    nodes {
+
+                      id
+
+                      content {
+
+                        ... on Issue {
+
+                          number
+                          title
+
+                        }
+
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              }
+
+            }
+            `,
+            {
+              id: projectId
+            });
+
+
+            console.log(JSON.stringify(items, null, 2));
